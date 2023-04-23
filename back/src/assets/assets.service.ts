@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-
 import { ethers } from 'ethers';
+import { Asset } from 'src/models/assets.model';
 
 const ERC20_ABI = ['function balanceOf(address) view returns (uint)'];
 
@@ -29,23 +29,27 @@ Object.entries(contractAddresses).forEach(([token, address]) => {
   };
 });
 
-const getBalance = async (token, walletAddress) => {
+const getBalance = async (
+  token: string,
+  walletAddress: string,
+): Promise<Asset> => {
   const contract = contracts[token].contract;
   const balance = await contract.balanceOf(walletAddress);
   const formattedBalance = ethers.utils.formatEther(balance);
-  return { [token]: formattedBalance };
+  return { token, balance: formattedBalance };
 };
 
-const getBalances = async (address) => {
+const getBalances = async (address: string) => {
   const balanceRequests = Object.keys(contractAddresses).map((token) =>
     getBalance(token, address),
   );
   const results = await Promise.all(balanceRequests);
-  const balances = results.reduce(
-    (acc, result) => Object.assign(acc, result),
-    {},
-  );
-  return balances;
+  // const balances = results.reduce(
+  //   (acc, result) => Object.assign(acc, result),
+  //   {},
+  // );
+  console.log('getBalances:', results);
+  return results;
 };
 
 @Injectable()
@@ -54,6 +58,7 @@ export class AssetsService {
     if (!ethers.utils.isAddress(account)) {
       throw new BadRequestException('Invalid account address');
     }
-    return getBalances(account);
+    const balances = await getBalances(account);
+    return { assets: balances };
   }
 }

@@ -21,7 +21,7 @@ export const blackPage = createTheme(colors, {
 export const whitePage = createTheme(colors, {
   primary: "#2E2E2E",
   contrast: "white",
-  secondary: "#00000050",
+  secondary: "#0000007f",
   background: "#E8EBEE",
   background2: "#F7F7F7",
   border: "#F2F2F2",
@@ -29,7 +29,7 @@ export const whitePage = createTheme(colors, {
   active: "#F0F8FF",
   text: {
     normal: "#2E2E2E",
-    dimmed: "#00000050",
+    dimmed: "#0000007f",
     contrast: "white",
     active: "#0080FF",
   }

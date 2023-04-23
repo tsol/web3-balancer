@@ -1,5 +1,4 @@
-
 export interface Asset {
   token: string;
-  balance: number;
+  balance: string;
 }

@@ -3,6 +3,7 @@ export interface IDataTable {
  columns: IDataTableColumn[];
  rows: IDataTableRow[];
  pageSize?: number;
+ isLoading?: boolean;
 }
 
 export interface IDataCellComplex {

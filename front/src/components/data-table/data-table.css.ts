@@ -21,6 +21,12 @@ export const row = style({
   flexGrow: '0',
 });
 
+export const loadingDiv= style({
+  display: 'flex',
+  justifyContent: 'center',
+  margin: '20px auto',
+});
+
 const th: GlobalStyleRule = {
   textAlign: 'left',
   padding: '0 6px',
@@ -72,17 +78,5 @@ export const pagination = style({
   padding: '8px 0'
 });
 
-// export const tcellWithIcon = style({
-//   display: 'flex',
-//   flexDirection: 'row',
-//   alignItems: 'center',
-//   padding: '4px 12px',
-//   gap: '12px',
-//   height: '48px',
-//   background: vars.colors.background,
-//   borderBottom: `1px solid ${vars.colors.border}`,
-//   flex: 'none',
-//   order: '0',
-//   flexGrow: '0',
-// });
+
 
