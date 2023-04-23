@@ -13,11 +13,4 @@ export class RatesController {
   async getStoresCoinsRates(): Promise<any> {
     return this.ratesStore.getRates();
   }
-
-  @Get('live')
-  async getAllCoinsRates(): Promise<any> {
-    const resp = await this.ratesFetch.getAllCoinsRates();
-    console.log('RatesController.getData()', resp);
-    return resp;
-  }
 }

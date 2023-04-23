@@ -1,12 +1,15 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
-
+import { knownTokens } from './utils/known-tokens';
 interface CoinListItem {
   id: string;
   symbol: string;
   name: string;
 }
+
+const BATCH_SIZE = 30;
+let lastFetchIndex = 0;
 
 @Injectable()
 export class RatesFetchService {
@@ -25,13 +28,26 @@ export class RatesFetchService {
     return data;
   }
 
-  async getAllCoinsRates() {
+  async getNextBatch() {
     const list = await this.getCoinsList();
-    const ids = list.map((item: CoinListItem) => item.id).slice(0, 30);
-    const prices = await this.getCoinsPrice(ids);
+    const ids = list
+      .filter((item: CoinListItem) => knownTokens[item.symbol])
+      .map((item: CoinListItem) => item.id);
+
     const result = [];
 
-    Object.entries<any>(prices).forEach(([id, value]) => {
+    const batchIds = ids.slice(lastFetchIndex, lastFetchIndex + BATCH_SIZE);
+
+    // eslint-disable-next-line prettier/prettier
+    console.log('Fetching rates batch:', lastFetchIndex, ' => ', lastFetchIndex + BATCH_SIZE);
+
+    lastFetchIndex += BATCH_SIZE;
+    if (lastFetchIndex >= ids.length) {
+      lastFetchIndex = 0;
+    }
+
+    const batchPrices = await this.getCoinsPrice(batchIds);
+    Object.entries<any>(batchPrices).forEach(([id, value]) => {
       const price = value.usd;
       const item = list.find((item: CoinListItem) => item.id === id);
       result.push({ ...item, price });

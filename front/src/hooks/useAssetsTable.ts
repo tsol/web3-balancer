@@ -1,4 +1,4 @@
-import { useAssetsStore } from '@/store/assets.store';
+import { useStore } from '@/store/store';
 import { useEffect, useState } from 'react';
 import { fetchAssets } from '@/services/assets.service';
 import { IDataTable, IDataTableRow } from '@/models/data-table.model';
@@ -13,15 +13,15 @@ const assets: IDataTable = {
   rows: []
 }
 function useAssetsTable(account: string | null) {
-  const store = useAssetsStore();
+  const store = useStore();
   const { isMetamaskConnected, isBscNetwork } = useMetamask();
   const [rows, setRows] = useState<IDataTableRow[]>([]);
   
-  const isLoading = store.isLoading || !isMetamaskConnected || !isBscNetwork;
+  const isAssetsLoading = store.isAssetsLoading || !isMetamaskConnected || !isBscNetwork;
 
   useEffect( () => {
     if (isMetamaskConnected && isBscNetwork && account) {
-      store.startLoading();
+      store.startAssetsLoading();
       fetchAssets(account).then( assets => store.setAssets(assets) );
     }
   }, [account, isMetamaskConnected, isBscNetwork]);
@@ -35,7 +35,7 @@ function useAssetsTable(account: string | null) {
   }, [store.assets]);
   
   
-  return { ...assets, rows, isLoading };
+  return { ...assets, rows, isAssetsLoading };
 }
 
 export default useAssetsTable;

@@ -13,7 +13,7 @@ export class RatesUpdateTask {
   @Cron('0 * * * * *')
   async handleCron() {
     console.log('[TASK] RatesUpdate');
-    const rates = await this.ratesFetch.getAllCoinsRates();
+    const rates = await this.ratesFetch.getNextBatch();
     await this.ratesStore.createOrUpdateRates(rates);
   }
 }
