@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import * as styles from './data-table.css';
 
-import { IDataTable, IDataTableRow } from './data-table.model';
+import { IDataTable, IDataTableRow } from '../../models/data-table.model';
 import usePagination from '@/hooks/usePagination';
 
 import DataTableHeader from './data-table-header';

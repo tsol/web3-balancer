@@ -1,28 +1,29 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ICellViewProps } from './data-table.model';
+import { ICellViewProps, isDataCellComplex } from '../../models/data-table.model';
 import * as styles from './cell-view-coin.css';
 
 const CellViewCoin: React.FC<ICellViewProps> = ({ data }) => {
-
-  console.log('Cell view', data);
   
-  let icon: string = '';
   let value;
-  let comment;
+  let icon: string = '';
+  let comment: string = '';
+  let alt: string = '';
 
-  if (typeof data === 'string') {
-    value = data;
-    icon = data;
-    comment = 'Description is optional';
-  }
-  else {
+  if (isDataCellComplex(data)) {
     icon = ( data.icon ?? '');
     value = data.value;
-    comment = data.comment;
+    comment = data.comment ?? ''
+    alt = data.value ?? '';
   }
-  
+  else if (data) {
+    value = data;
+    icon = ( typeof data === 'string' ? data : '' );
+    alt = ( typeof data === 'string' ? data : '' );
+    comment = 'Description is optional';
+  }
+ 
   const svg = icon && `icons/${icon.toLowerCase()}.svg`;
 
   return <div className={styles.coinView}>
@@ -34,7 +35,7 @@ const CellViewCoin: React.FC<ICellViewProps> = ({ data }) => {
           src={svg}
           width="36"
           height="36"
-          alt={value}
+          alt={alt}
         />
       </div>
     }

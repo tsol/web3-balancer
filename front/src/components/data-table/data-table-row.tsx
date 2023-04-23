@@ -1,7 +1,7 @@
 
 import React from 'react';
 import * as styles from './data-table.css';
-import { IDataTableColumn, IDataTableRow } from './data-table.model';
+import { IDataTableColumn, IDataTableRow } from '../../models/data-table.model';
 import CircleOutlined from '@mui/icons-material/CircleOutlined'
 import CellView from './cell-view';
 
