@@ -11,8 +11,9 @@ datasource db {
 }
 
 model ExchangeRate {
-  id        Int      @id @default(autoincrement())
-  date      DateTime @default(now()) 
-  currency  String
-  rate      Float
+  id       String   @id
+  symbol   String
+  name     String
+  price    Float
 }
+

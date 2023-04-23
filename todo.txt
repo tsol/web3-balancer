@@ -9,11 +9,11 @@
  - проверка сеть BTS testnet?
  - отображение аккаунта
  - опрашиваем балансы по списку контрактов и возвращаем API (/api/assets/all)
+ - account info
+ - loader
 
 вс.
 
-  - account info
-  - loader
   - ssr for accounts
 
   - запрашиваем курсы валют по расписанию ( /api/marketCap )
