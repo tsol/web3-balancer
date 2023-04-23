@@ -9,10 +9,21 @@ import DataTable from '@/components/data-table/data-table';
 import useAssetsTable from '@/hooks/useAssetsTable';
 import AccountInfo from '@/components/account-info';
 import { useMetamask } from '@/hooks/useMetamask';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 export default function Home() {
   const { currentAccount } = useMetamask();
+  const { isMetamaskConnected, isMetamaskInstalled, connectMetamask } = useMetamask();
   const assetsTableData = useAssetsTable(currentAccount);
+  const suggestedOnce = useRef(false);
+
+  useLayoutEffect(() => {
+    if (!isMetamaskConnected && isMetamaskInstalled && !suggestedOnce.current) {
+      console.log('connecting metamask');
+      connectMetamask();
+      suggestedOnce.current = true;
+    }
+  }, [isMetamaskConnected, isMetamaskInstalled]);
 
   return <Page title="your assets">
       <PageToolbar>

@@ -8,10 +8,16 @@ import * as shared from '@/styles/shared.css';
 import * as styles from './index.css';
 
 import useIsClient from '@/hooks/useIsClient';
+import { useRouter } from 'next/router';
 
 
 export default function Home() {
+  const router = useRouter();
   const isClient = useIsClient();
+
+  const handleClick = () => {
+    router.push('/assets');
+  };
 
   return <Page title="Balancer: track your assets with ease" dark>
     
@@ -25,7 +31,7 @@ export default function Home() {
           <h1 className={styles.title}>
             Track Your Crypto Wealth with Our Wallet Balance Service
           </h1>
-          <button>METAMASK</button>
+          <button onClick={handleClick} >METAMASK</button>
         </div>
         <div className={styles.contentRight}>
           { isClient && <Shapes /> }
