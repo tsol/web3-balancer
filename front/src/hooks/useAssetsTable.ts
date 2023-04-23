@@ -17,7 +17,7 @@ function useAssetsTable(account: string | null) {
   const { isMetamaskConnected, isBscNetwork } = useMetamask();
   const [rows, setRows] = useState<IDataTableRow[]>([]);
   
-  const isAssetsLoading = store.isAssetsLoading || !isMetamaskConnected || !isBscNetwork;
+  const isLoading = store.isAssetsLoading || !isMetamaskConnected || !isBscNetwork;
 
   useEffect( () => {
     if (isMetamaskConnected && isBscNetwork && account) {
@@ -35,7 +35,7 @@ function useAssetsTable(account: string | null) {
   }, [store.assets]);
   
   
-  return { ...assets, rows, isAssetsLoading };
+  return { ...assets, rows, isLoading };
 }
 
 export default useAssetsTable;
