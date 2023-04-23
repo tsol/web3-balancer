@@ -26,8 +26,9 @@ npm run dev
 The nest server should run on localhost:3001 waiting for connections.
 Every 3 minutes update task should run fetchig 30 of ~400 known tokens from the free service.
 
-The server is now ready for balance requests at /api/assets/[account_number],
-and for exchange rates at /api/marketCap.
+The server is now ready for requests at
+1. [http://localhost:3001/api/assets/account_number](http://localhost:3001/api/assets/0x6ce8dA28E2f864420840cF74474eFf5fD80E65B8)
+2. [http://localhost:3001/api/marketCap](http://localhost:3001/api/marketCap)
 
 ## Starting up frontend
 
@@ -41,9 +42,9 @@ npm run dev
 
 That will run application on port 3000.
 
-[http://localhost:3000/] - welcome page
-[http://localhost:3000/assets] - balance check page
-[http://localhost:3000/rates] - token exchange rates
+1. [http://localhost:3000/](http://localhost:3000/) - welcome page
+2. [http://localhost:3000/assets](http://localhost:3000/assets) - balance check page
+3. [http://localhost:3000/rates](http://localhost:3000/rates) - token exchange rates
 
 
 ## Troubleshooting
