@@ -19,7 +19,7 @@ export default function Home() {
     router.push('/assets');
   };
 
-  return <Page title="Balancer: track your assets with ease" dark>
+  return <Page title="track your assets with ease" dark>
     
       <PageToolbar>
         <div className={shared.h5}>Balancer</div>
