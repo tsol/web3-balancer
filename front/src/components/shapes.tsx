@@ -1,10 +1,10 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { initWorld, onDestroy } from '../plugins/shapes';
 import * as styles from './shapes.css';
 
 const Shapes: React.FC = () => {
   
-  useLayoutEffect(() => {
+  useEffect(() => {
     initWorld();
     return () => {
       onDestroy();
