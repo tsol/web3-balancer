@@ -11,7 +11,7 @@ interface PageProps {
 const Page: React.FC<PageProps> = ({ title, children, dark }: PageProps) => {
   return <>
     <Head>
-      <title>Balancer: {title}</title>
+      <title>{title}</title>
       <meta name="description" content={title} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
